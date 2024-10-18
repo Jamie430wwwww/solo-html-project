@@ -13,6 +13,10 @@ function playNote(key){
     key.addEventListener( 'mouseup', () => {
         console.log('key up')
         key.classList.remove('active')
-        noteAudio.pause()
+        setTimeout(function() {
+            noteAudio.pause()
+          }, 350);
     })
 }
+
+
