@@ -5,56 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href= "styles.css">
     <script src = "script.js" defer></script>
+    <!-- Fontawesome CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- Fontawesome CSS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- jQuery CSS CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <title>piano</title>
 </head>
 
 
-<input type="range" id="volume-slider">
+<div class="top-bar">
+
+    <div class = custom-keybinds>
+        <button class = 'changeKey' id = 'changeKey'>Change keybinds</button>
+    </div>
+
+    <input class = 'volumeBar' type="range" id="vol-control">
+
+    
+
+</div>
+  
+
 
 <body>
 
-    <div class= "piano">
-        <div data-note = "c3" class= "key white"></div>
-        <div data-note = "Db3" class= "key black"></div>
-        <div data-note = "d3" class= "key white"></div>
-        <div data-note = "Eb3" class= "key black"></div>
-        <div data-note = "e3" class= "key white"></div>
-        <div data-note = "f3" class= "key white"></div>
-        <div data-note = "Gb3" class= "key black"></div>
-        <div data-note = "g3" class= "key white"></div>
-        <div data-note = "Ab3" class= "key black"></div>
-        <div data-note = "a3" class= "key white"></div>
-        <div data-note = "Bb3" class= "key black"></div>
-        <div data-note = "b3" class= "key white"></div>
-        <div data-note = "c4" class= "key white"></div>
-        <div data-note = "Db4" class= "key black"></div>
-        <div data-note = "d4" class= "key white"></div>
-        <div data-note = "Eb4" class= "key black"></div>
-        <div data-note = "e4" class= "key white"></div>
-        <div data-note = "f4" class= "key white"></div>
-        <div data-note = "Gb4" class= "key black"></div>
-        <div data-note = "g4" class= "key white"></div>
-        <div data-note = "Ab4" class= "key black"></div>
-        <div data-note = "a4" class= "key white"></div>
-        <div data-note = "Bb4" class= "key black"></div>
-        <div data-note = "b4" class= "key white"></div>
-        <div data-note = "c5" class= "key white"></div>
-        <div data-note = "Db5" class= "key black"></div>
-        <div data-note = "d5" class= "key white"></div>
-        <div data-note = "Eb5" class= "key black"></div>
-        <div data-note = "e5" class= "key white"></div>
-        <div data-note = "f5" class= "key white"></div>
-        <div data-note = "Gb5" class= "key black"></div>
-        <div data-note = "g5" class= "key white"></div>
-        <div data-note = "Ab5" class= "key black"></div>
-        <div data-note = "a5" class= "key white"></div>
-        <div data-note = "Bb5" class= "key black"></div>
-        <div data-note = "b5" class= "key white"></div>
-
-
+    <div class="piano">
+        <div data-note="c3" class="key white">a</div>
+        <div data-note="Db3" class="key black">`</div>
+        <div data-note="d3" class="key white">s</div>
+        <div data-note="Eb3" class="key black">1</div>
+        <div data-note="e3" class="key white">d</div>
+        <div data-note="f3" class="key white">f</div>
+        <div data-note="Gb3" class="key black">2</div>
+        <div data-note="g3" class="key white">g</div>
+        <div data-note="Ab3" class="key black">3</div>
+        <div data-note="a3" class="key white">h</div>
+        <div data-note="Bb3" class="key black">4</div>
+        <div data-note="b3" class="key white">j</div>
+        <div data-note="c4" class="key white">k</div>
+        <div data-note="Db4" class="key black">5</div>
+        <div data-note="d4" class="key white">l</div>
+        <div data-note="Eb4" class="key black">6</div>
+        <div data-note="e4" class="key white">;</div>
+        <div data-note="f4" class="key white">'</div>
+        <div data-note="Gb4" class="key black">7</div>
+        <div data-note="g4" class="key white">Enter</div>
+        <div data-note="Ab4" class="key black">8</div>
+        <div data-note="a4" class="key white">z</div>
+        <div data-note="Bb4" class="key black">9</div>
+        <div data-note="b4" class="key white">x</div>
+        <div data-note="c5" class="key white">c</div>
+        <div data-note="Db5" class="key black">0</div>
+        <div data-note="d5" class="key white">v</div>
+        <div data-note="Eb5" class="key black">-</div>
+        <div data-note="e5" class="key white">b</div>
+        <div data-note="f5" class="key white">n</div>
+        <div data-note="Gb5" class="key black">=</div>
+        <div data-note="g5" class="key white">m</div>
+        <div data-note="Ab5" class="key black">Backspace</div>
+        <div data-note="a5" class="key white">,</div>
+        <div data-note="Bb5" class="key black">/</div>
+        <div data-note="b5" class="key white">.</div>
     </div>
-
     
     <audio id = "c3" src = "piano-mp3/C3.mp3"></audio>
     <audio id = "a3" src = "piano-mp3/A3.mp3"></audio>
@@ -99,4 +118,92 @@
     
     
 </body>
+
+<div class="sidebar">
+    <footer class="music-controls">
+        <div class="wrapper">
+
+      <header>
+        <h1>Dictaphone</h1>
+      </header>
+
+      <section class="main-controls">
+        <canvas class="visualizer" height="60px"></canvas>
+        <div id="buttons">
+          <button class="record">Record</button>
+          <button class="stop">Stop</button>
+        </div>
+      </section>
+
+      <section class="sound-clips">
+
+
+      </section>
+
+    </div>
+    </footer>  
+  </div>
+</div>
+
+<div class="sidebar2">
+    <audio id = "metronomeMp3" src="res\metronome.mp3" preload="auto"></audio>
+    <div class="card shadow w-100">
+        <div class="card-body">
+            <div class="container-fluid">
+                <!-- Beats Per Minute Elements -->
+                <!-- BPM Text Display -->
+                <div class="d-flex justify-content-center w-100">
+                    <div class="d-flex flex-column justify-content-center align-items-center" id="bpm-container">
+                        <span id="bpm">140</span>
+                        <span>BPM</span>
+                    </div>
+                </div>
+                <!-- End of BPM Text Display -->
+
+                <div class="my-3 w-100 d-flex align-items-center">
+                    <div class="col-auto flex-shrink-1">
+                        <span><i class="fas fa-minus px-2"></i></span>
+                    </div>
+                    <!-- BPM Slider -->
+                    <div class="col-auto flex-grow-1">
+                        <input type="range" class="form-range" min="35" max="250" value="140" id="bpmSlider">
+                    </div>
+                    <!-- End of BPM Slider -->
+                    <div class="col-auto flex-shrink-1 px-2">
+                        <span><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <!-- End of Beats Per Minute Elements -->
+
+                <!-- Beats per Measure -->
+                <div class="my-3">
+                    <div class="w-100 d-flex align-items-center justify-content-center">
+                        <div class="col-auto flex-shrink-1">
+                            <button class="btn btn-sm btn-default border shadow beatsBTN" data-type="minus"><i class="fas fa-minus"></i></button>
+                        </div>
+                        <div class="col-4">
+                            <div id="beatsText" class="text-center">4</div>
+                        </div>
+                        <div class="col-auto flex-shrink-1">
+                            <button class="btn btn-sm btn-default border shadow beatsBTN" data-type="plus"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End of Beats per Measure -->
+
+                <!-- Buttons -->
+                <div class="my-3">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button type="button" class="controlBtns" id="playMetronome"><i class="fas fa-play"></i></button>
+                        <button type="button" class="controlBtns" id="stopMetronome"><i class="fas fa-stop"></i></button>
+                    </div>
+                </div>
+                <!-- End of Buttons -->
+
+            </div>
+        </div>
+    </div>
+</div>
+  
 </html>

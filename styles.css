@@ -3,45 +3,422 @@
 }
 
 body{
-    background-color: rgb(0, 110, 99);
+    background-color: rgb(74, 75, 69);
+    background-image: url("https://media.istockphoto.com/id/490056196/photo/guitar-amplifier-texture.jpg?s=612x612&w=0&k=20&c=noKID3b_8I95f-wCR8NWcdGTW8O2LF81WvNj29N9nUI=");
+    background-position: 0%;
+    background-attachment: fixed;
     margin: 0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.8rem;
     
 
 }
 
-.piano{
+.piano {
+  position: fixed;
+  display: flex;
+  top: 30%;
+  margin-left: 15%;
+}
+
+.key {
+  height: calc(var(--width) * 5);
+  width: var(--width);
+  position: relative; /* Allows positioning of child elements */
+  display: flex; /* Flexbox to center the text */
+  justify-content: center; /* Center horizontally */
+  align-items: flex-end; /* Align text at the bottom */
+  font-size: 15px; /* Adjust font size as needed */
+  color: red; /* Set text color to red */
+  padding-bottom: 5px; /* Space between the text and bottom */
+  overflow: hidden;
+}
+
+.white {
+  --width: 50px;
+  background-color: white;
+  border: 1px solid #333;
+}
+
+.white.active {
+  background-color: #ccc;
+}
+
+.black {
+  --width: 30px;
+  background-color: black;
+  margin-left: calc(var(--width)/-2);
+  margin-right: calc(var(--width)/-2);
+  z-index: 2;
+}
+
+.black.active {
+  background-color: #333;
+}
+
+/* Additional style to ensure text on black keys is also red */
+.black .key-text {
+  color: red; /* Ensure black keys also have red text */
+}
+
+/* Optional: Style for the text container */
+.key-text {
+  position: absolute; /* Position text within the key */
+  bottom: 5px; /* Adjust the distance from the bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Offset to center */
+}
+
+
+
+
+
+/* Top bar */
+
+.top-bar {
+    background: repeating-linear-gradient(#e3e3e3 50%, #202219 50%);
+    position: fixed;
+    top: 0;
+    padding: 60px;
+    width: 100%;
     display: flex;
-
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+    z-index: 1;
+    overflow: hidden;
 }
 
-.key{
-    height: calc(var(--width) * 5);
-    width: var(--width);
-
+.top-bar input[type="text"] {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    color: #000;
+    border-radius: 5px;
 }
 
-.white{
-    --width: 50px;
-    background-color: white;
-    border: 1px solid #333;
+/* Sidebar */
+.sidebar {
+    left: 0;
+    top: 18%;
+    position: fixed;
+    width: 320px;
+    height: 30%;
+    padding: 10px;
+    margin-right: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
 }
 
-.white.active{
-    background-color: #ccc;
+.sidebar::-webkit-scrollbar {
+  width: 1em;
 }
 
-.black{
-    --width: 30px;
+.sidebar::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar2 {
+  left: 0;
+  top: 48%;
+  position: fixed;
+  width: 320px;
+  height: 49%;
+  padding: 10px;
+  margin-right: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: hidden;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #d62929;
+}
+
+.volumeBar{
+  border-radius: 10px;
+  background: #d62929;
+}
+
+.changeKey {
+  font-size: 1rem;
+  background: #0088cc;
+  text-align: center;
+  color: white;
+  border: none;
+  transition: all 0.2s;
+  padding: 0.5rem;
+}
+.changeKey:hover,
+.changeKey:focus {
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 1);
+  background: #0ae;
+}
+  
+.changeKey:active {
+  box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(2px);
+}
+
+
+
+/*footer container for the gray bar thingy*/
+.music-controls-container {
+    width: 100%;
+    position: fixed;
+    bottom: 2%;
+    padding: 0 10px;
+}
+
+.music-controls {
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px;
+    background-color: #fff;
+    display: flex;
+}
+
+.music-controls .track-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #000;
+}
+
+.music-controls .track-info img {
+    border-radius: 5px;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  
+  .wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  h1,
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: normal;
+    padding: 0.5rem 0 0 0;
+  }
+  
+  .main-controls {
+    padding: 0.5rem 0;
+  }
+  
+  canvas {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  #buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  #buttons button {
+    font-size: 1rem;
+    padding: 1rem;
+    width: calc(50% - 0.25rem);
+  }
+  
+  button {
+    font-size: 1rem;
+    background: #0088cc;
+    text-align: center;
+    color: white;
+    border: none;
+    transition: all 0.2s;
+    padding: 0.5rem;
+  }
+  
+  button:hover,
+  button:focus {
+    box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 1);
+    background: #0ae;
+  }
+  
+  button:active {
+    box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.5);
+    transform: translateY(2px);
+  }
+  
+  /* Make the clips use as much space as possible, and
+   * also show a scrollbar when there are too many clips to show
+   * in the available space */
+  .sound-clips {
+    flex: 1;
+    overflow: auto;
+  }
+  
+  section,
+  article {
+    display: block;
+  }
+  
+  .clip {
+    padding-bottom: 1rem;
+  }
+  
+  audio {
+    width: 100%;
+    display: block;
+    margin: 1rem auto 0.5rem;
+  }
+  
+  .clip p {
+    display: inline-block;
+    font-size: 1rem;
+  }
+  
+  .clip button {
+    font-size: 1rem;
+    float: right;
+  }
+  
+  button.delete {
+    background: #f00;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Checkbox hack to control information box display */
+  
+  label {
+    font-size: 3rem;
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    z-index: 5;
+    cursor: pointer;
     background-color: black;
-    margin-left: calc(var(--width)/-2);
-    margin-right: calc(var(--width)/-2);
-    z-index: 2;
+    border-radius: 10px;
+  }
+  
+  input[type="checkbox"] {
+    position: absolute;
+    top: -100px;
+  }
+  
+  aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(100%);
+    transition: 0.3s all ease-out;
+    background-color: #82981f;
+    padding: 1rem;
+  }
+  
+  aside p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+  }
+  
+  aside a {
+    color: #666;
+  }
+  
+  /* Toggled State of information box */
+  input[type="checkbox"]:checked ~ aside {
+    transform: translateX(0);
+  }
+  
+  /* Cursor when clip name is clicked over */
+  
+  .clip p {
+    cursor: pointer;
+  }
+  
+  /* Adjustments for wider screens */
+  @media all and (min-width: 800px) {
+    /* Don't take all the space as readability is lost when line length
+       goes past a certain size */
+    .wrapper {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+  }
+ 
+div#bpm-container {
+    width: 170px;
+    height: 170px;
+    padding: 5px;
+    background: #30c7ec;
+    background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);
+    border-radius: 100%;
+    border: 12px dashed #008096;
+}
+ 
+div#bpm-container>span:nth-child(1) {
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: #006475;
+    letter-spacing: 5px;
+}
+ 
+div#bpm-container>span:nth-child(2) {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #026070;
+}
+ 
+div.beatsText {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+ 
+button.beatsBTN{
+    transition: transform .1s ease;
+}
+button.beatsBTN:active{
+    transform: scale(.9);
+}
+#playMetronome{
+    border: 5px dashed #006475;
+    background: #66a6ff;
+    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    color: #006475;
+}
+#stopMetronome{
+    display: none;
+    border: 5px dashed #b14536;
+    background: #fe9a8b;
+    background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+    color: #6e0d00;
+}
+button.controlBtns {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
 }
 
-.black.active{
-    background-color: #333;
-}
