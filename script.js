@@ -3,106 +3,113 @@ const white_Keys_Index = ['c3', 'd3', 'e3', 'f3', 'g3', 'a3', 'b3', 'c4', 'd4', 
 const black_Keys_Index = ['Db3', 'Eb3' ,'Gb3', 'Ab3', 'Bb3', 'Db4', 'Eb4', 'Gb4', 'Ab4', 'Bb4', 'Db5', 'Eb5', 'Gb5', 'Ab5', 'Bb5']
 var white_Keys = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.']
 var black_Keys = ['`', '1' ,'2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', '/']
-
-
 const keys = document.querySelectorAll('.key');
 const whiteKeys = document.querySelectorAll('.key.white');
 const blackKeys = document.querySelectorAll('.key.black');
-const changeKey = document.getElementById('changeKey')
-var disable = false;
-
-keys.forEach(key =>{
-    key.addEventListener('mousedown', () => playNote(key))
-})
+const changeKey = document.getElementById('changeKey');
+var keyChangeMode = false;
 
 
-// Change keybinds functionality
-changeKey.addEventListener('click', () => {
-  if (disable) {
-      disable = false;
-      changeKey.textContent = 'Change keybinds';
-      changeKey.disabled = false;
-      currentKeyToChange = null;
-      return; // Exit if already in change mode
-  }
 
-  disable = true;
-  changeKey.textContent = 'Press key to change keybinds or press again to stop';
-
-  // Listen for key changes
-  keys.forEach(key => {
-      key.addEventListener('mousedown', () => {
-          currentKeyToChange = key.dataset.note; // Store the note of the key to change
-          changeKey.textContent = `Press a key to change ${currentKeyToChange} to...`;
-      });
-  });
-
-  // Listen for new keypresses
-  document.addEventListener('keypress', (e) => {
-      if (disable && currentKeyToChange) {
-          const newKey = e.key;
-          const whiteKeysIndex = white_Keys.indexOf(newKey);
-          const blackKeysIndex = black_Keys.indexOf(newKey);
-
-          // Check if the new key is valid and not already assigned
-          if (whiteKeysIndex > -1 || blackKeysIndex > -1) {
-              if (whiteKeysIndex > -1) {
-                  // Change the key binding for the white key
-                  const noteIndex = white_Keys_Index.indexOf(currentKeyToChange);
-                  if (noteIndex > -1) {
-                      white_Keys[noteIndex] = newKey; // Update the white key mapping
-                      console.log(`Changed ${currentKeyToChange} to ${newKey}`);
-                      keys.textContent = newKey
-                  }
-              }
-
-              if (blackKeysIndex > -1) {
-                  // Change the key binding for the black key
-                  const noteIndex = black_Keys_Index.indexOf(currentKeyToChange);
-                  if (noteIndex > -1) {
-                      black_Keys[noteIndex] = newKey; // Update the black key mapping
-                      console.log(`Changed ${currentKeyToChange} to ${newKey}`);
-                      keys.textContent = newKey
-                  }
-              }
-
-              changeKey.textContent = `Changed ${currentKeyToChange} to ${newKey}`;
-              currentKeyToChange = null; // Reset after change
-              keys.forEach(key => {
-                key.removeEventListener('mousedown', () => {
-                    currentKeyToChange = key.dataset.note; // Store the note of the key to change
-                    changeKey.textContent = `Press a key to change ${currentKeyToChange} to...`;
-                });
-            });
-          }
-      }
-  });
+// Prevent mouse clicks from triggering key changes unless in change mode
+keys.forEach(key => {
+    key.addEventListener('mousedown', () => {
+        if (!keyChangeMode) {
+            playNote(key); // Only play note if not in change mode
+            
+        } 
+        
+    });
 });
 
+var clickCount = 0
+changeKey.addEventListener('mousedown', ()=> {
+  clickCount += 1
+  changeKey.textContent = 'Press the key you want to change or press again to cancel'
+  keyChangeMode = true;
+  keys.forEach(key => {
+    key.addEventListener('mousedown', () => {
+        if (keyChangeMode) {
+            var changeNote = key.dataset.note
+            var changeNoteIndexWhite = white_Keys_Index.indexOf(changeNote)
+            var changeNoteIndexblack = black_Keys_Index.indexOf(changeNote)
+            var originalKeyWhite = white_Keys[changeNoteIndexWhite]
+            var originalKeyBlack = black_Keys[changeNoteIndexblack]
+            changeKey.textContent = 'Change ' + changeNote + ' to ? or press again to cancel'
+            key.classList.add('active');
+            document.addEventListener('keydown', e => {
+              if(keyChangeMode){
+                if (changeNoteIndexWhite > -1){
+                  var tempIndex = white_Keys.indexOf(e.key)
+                  console.log(tempIndex +'test')
+                  if (tempIndex > -1){
+                    console.log('same')
+                    white_Keys[changeNoteIndexWhite] = e.key
+                    key.textContent = e.key
+                    white_Keys[tempIndex] = originalKeyWhite
+                    whiteKeys[tempIndex].textContent = originalKeyWhite
+                  }else if(tempIndex==-1){
+                    tempIndex = black_Keys.indexOf(e.key)
+                    white_Keys[changeNoteIndexWhite] = e.key
+                    key.textContent = e.key
+                    black_Keys[tempIndex] = originalKeyWhite
+                    blackKeys[tempIndex].textContent = originalKeyWhite
+                  }else{
+                    white_Keys[changeNoteIndexWhite] = e.key
+                    key.textContent = e.key
+                  }
+                  changeKey.textContent = 'Changed ' + changeNote + ' to ' + e.key + ', press again to stop'
+                  key.classList.remove('active')
+                }
+                if (changeNoteIndexblack > -1){
+                  var tempIndex = black_Keys.indexOf(e.key)
+                  console.log(tempIndex +'test')
+                  if (tempIndex > -1){
+                    console.log('same')
+                    black_Keys[changeNoteIndexBlack] = e.key
+                    key.textContent = e.key
+                    black_Keys[tempIndex] = originalKeyBlack
+                    blackKeys[tempIndex].textContent = originalKeyBlack
+                  }else if(tempIndex==-1){
+                    tempIndex = white_Keys.indexOf(e.key)
+                    black_Keys[changeNoteIndexblack] = e.key
+                    key.textContent = e.key
+                    white_Keys[tempIndex] = originalKeyBlack
+                    whiteKeys[tempIndex].textContent = originalKeyBlack
+                  }else{
+                    black_Keys[changeNoteIndexBlack] = e.key
+                    key.textContent = e.key
+                  }
+                  changeKey.textContent = 'Changed ' + changeNote + ' to ' + e.key + ', press again to stop'
+                  key.classList.remove('active')
+                }
+              }
+            })
+        }
+    });
+  
+});
+if (clickCount == 2){
+  console.log('stop')
+  keyChangeMode = false
+  clickCount  = 0
+  changeKey.textContent = 'Change keybinds'
+}
+})
 
 document.addEventListener('keydown', e => {
-
     console.log(e.key)
     if (e.repeat) return
-
     //get key and return to playNote according to e event
     const key = e.key;
     const whiteKeysIndex = white_Keys.indexOf(key)
     const blackKeysIndex = black_Keys.indexOf(key)
-
     if (whiteKeysIndex > -1) playNote(whiteKeys[whiteKeysIndex])
     if (blackKeysIndex > -1) playNote(blackKeys[blackKeysIndex])
-
-    
 })
-
-
 function playNote(key){
-
   let release;
-
-
-    if(!disable){
+    if(!keyChangeMode){
       console.log(key.dataset.note)
       const noteAudio = document.getElementById(key.dataset.note)
       if (!noteAudio.paused) {
