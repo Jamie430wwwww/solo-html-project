@@ -77,7 +77,7 @@ changeKey.addEventListener('mousedown', ()=> {
                     white_Keys[tempIndex] = originalKeyBlack
                     whiteKeys[tempIndex].textContent = originalKeyBlack
                   }else{
-                    black_Keys[changeNoteIndexBlack] = e.key
+                    black_Keys[changeNoteIndexblack] = e.key
                     key.textContent = e.key
                   }
                   changeKey.textContent = 'Changed ' + changeNote + ' to ' + e.key + ', press again to stop'
