@@ -11,6 +11,35 @@ var keyChangeMode = false;
 
 
 
+
+
+
+let volumeControl = document.getElementById('vol-control');
+let currentVolume = 1; // Default volume level (1 is max)
+
+// Function to set volume for all audio elements
+function setVolume() {
+    console.clear();   
+    const newVolume = volumeControl.value === "" ? 0 : volumeControl.value / 100; // Convert to a 0-1 range
+    console.log('Setting volume to:', newVolume);
+    
+    // Update currentVolume to reflect the new value
+    currentVolume = newVolume;
+
+    // Get the array of audio elements and loop through them to set the new volume value
+    Array.from(document.querySelectorAll("audio")).forEach(function(audio) {
+        audio.volume = currentVolume; // Apply the new volume
+    });
+}
+
+// Event listeners for volume control
+volumeControl.addEventListener('change', setVolume);
+volumeControl.addEventListener('input', setVolume);
+
+
+
+
+
 // Prevent mouse clicks from triggering key changes unless in change mode
 keys.forEach(key => {
     key.addEventListener('mousedown', () => {
@@ -114,15 +143,17 @@ function playNote(key){
       const noteAudio = document.getElementById(key.dataset.note)
       if (!noteAudio.paused) {
         noteAudio.currentTime = 0; // Reset to start
-        noteAudio.volume = 1; // Ensure volume is max when replaying
+        noteAudio.volume = currentVolume; // Ensure volume is max when replaying
       } else {
         // If not currently playing, just play it
         noteAudio.currentTime = 0; // Reset audio to start
-        noteAudio.volume = 1; // Ensure volume is max when first played
+        noteAudio.volume = currentVolume; // Ensure volume is max when first played
         noteAudio.play();
         key.classList.add('active');
       }
       function fadeOutNote() {
+        console.log(key.classList)
+        console.log('fade out')
         const fadeDuration = 350; // Duration in milliseconds
         const fadeInterval = 50; // Interval for volume change
         const volumeStep = fadeInterval / fadeDuration; // Calculate volume step
@@ -161,27 +192,6 @@ function playNote(key){
     })
     }
 }
-
-let volumeControl = document.getElementById('vol-control');
-
-function setVolume (){
-
-  console.clear()
-  console.log(volumeControl.value)
-  
-  // Get the array of audio element and loop through them to set the new volume value
-  Array.from(document.querySelectorAll("audio")).forEach(function(audio){
-  
-      //  if the input value is "", use zero
-      audio.volume = volumeControl.value == "" ? 0 : volumeControl.value / 100;
-    })
-};
-
-volumeControl.addEventListener('change', setVolume);
-volumeControl.addEventListener('input', setVolume);
-
-
-
 
 // Set up basic variables for app
 const record = document.querySelector(".record");

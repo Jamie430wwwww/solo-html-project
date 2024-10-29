@@ -80,10 +80,10 @@ body{
 /* Top bar */
 
 .top-bar {
-    background: repeating-linear-gradient(#e3e3e3 50%, #202219 50%);
+    background: repeating-linear-gradient(#e3e3e3 50%, #062840 50%);
     position: fixed;
     top: 0;
-    padding: 60px;
+    padding: 30px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -92,6 +92,7 @@ body{
     gap: 10px;
     z-index: 1;
     overflow: hidden;
+    box-shadow: 12px 12px 10px rgba(0, 0, 255, .2);
 }
 
 .top-bar input[type="text"] {
@@ -149,6 +150,7 @@ body{
 .volumeBar{
   border-radius: 10px;
   background: #d62929;
+  scrollbar-color: auto;
 }
 
 .changeKey {
@@ -252,6 +254,7 @@ body{
     border: none;
     transition: all 0.2s;
     padding: 0.5rem;
+    box-shadow: 5px 5px 10px rgba(0, 174, 255, 0.2);
   }
   
   button:hover,
