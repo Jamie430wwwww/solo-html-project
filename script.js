@@ -9,8 +9,34 @@ const blackKeys = document.querySelectorAll('.key.black');
 const changeKey = document.getElementById('changeKey');
 var keyChangeMode = false;
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Get the saved color mode from local storage
+  const savedMode = localStorage.getItem('colorMode');
+  const piano = document.getElementById('piano');
 
-
+  if (savedMode === 'dark') {
+      document.body.style.backgroundColor = '#333';
+      document.body.style.color = '#fff';
+      document.body.style.backgroundImage = ''
+      document.body.style.backgroundColor = '#444';
+      console.log('dark')
+  } else if (savedMode === 'light') {
+      document.body.style.backgroundColor = '#f4f4f4';
+      document.body.style.color = '#000';
+      document.body.style.backgroundImage = ''
+      document.body.style.backgroundColor = '#fff';
+      console.log('light')
+  } else {
+      // Classic mode with an online image
+      document.body.style.backgroundColor = '#f4f4f4';
+      document.body.style.color = '#000';
+      document.body.style.backgroundImage = 'url(https://media.istockphoto.com/id/490056196/photo/guitar-amplifier-texture.jpg?s=612x612&w=0&k=20&c=noKID3b_8I95f-wCR8NWcdGTW8O2LF81WvNj29N9nUI=)'
+      document.body.style.backgroundAttachment = 
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundPosition = 'center';
+      console.log('classic')
+  }
+})
 
 
 
