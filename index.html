@@ -15,6 +15,14 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(https://t3.ftcdn.net/jpg/06/06/82/00/360_F_606820053_stsPpDX3vIt4IIzeuLA0fyegTU1ui2iT.jpg);
         }
         button {
             font-size: 1rem;
@@ -29,6 +37,7 @@
         h1 {
             text-align: center;
             margin-bottom: 20px;
+            color: #ffffff;
         }
         .color-input {
             margin: 20px 0;
@@ -50,12 +59,15 @@
         .nav-link:hover {
             background-color: #0056b3;
         }
+        label{
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
     <h1>Welcome to My Program</h1>
     <div class="color-input">
-        <label for="colorMode">Select Color Mode:</label>
+        <label for="colorMode; color: white;">Select Color Mode:</label>
         <select id="colorMode">
             <option value="classic">Classic</option>
             <option value="dark">Dark</option>
